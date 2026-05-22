@@ -489,7 +489,7 @@ function showSavedReport(i){ const r=clients[currentClientId].reports[i]; docume
 async function callClaude(prompt, sys=''){
   const key=getApiKey();
   if(!key){ alert('Configure sua API Key primeiro (botão ⚙️ no topo).'); throw new Error('no key'); }
-  const body={model:'claude-sonnet-4-20250514',max_tokens:1500,messages:[{role:'user',content:prompt}]};
+  const body={model:'claude-sonnet-4-5',max_tokens:1500,messages:[{role:'user',content:prompt}]};
   if(sys) body.system=sys;
   const r=await fetch('https://api.anthropic.com/v1/messages',{
     method:'POST',
