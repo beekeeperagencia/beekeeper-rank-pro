@@ -485,40 +485,25 @@ function renderSavedReports(){
 }
 function showSavedReport(i){ const r=clients[currentClientId].reports[i]; document.getElementById('rep-text').textContent=r.content; document.getElementById('rep-result').style.display='block'; }
 
-// ===== CLAUDE API (multi-proxy com fallback) =====
+// ===== CLAUDE API (direct browser access) =====
 async function callClaude(prompt, sys=''){
   const key=getApiKey();
   if(!key){ alert('Configure sua API Key primeiro (botão ⚙️ no topo).'); throw new Error('no key'); }
   const body={model:'claude-sonnet-4-20250514',max_tokens:1500,messages:[{role:'user',content:prompt}]};
   if(sys) body.system=sys;
-  const bodyStr = JSON.stringify(body);
-  const headers = {
-    'Content-Type':'application/json',
-    'x-api-key':key,
-    'anthropic-version':'2023-06-01'
-  };
-  const target = 'https://api.anthropic.com/v1/messages';
-  
-  // Lista de proxies para tentar em ordem
-  const proxies = [
-    `https://api.allorigins.win/raw?url=${encodeURIComponent(target)}`,
-    `https://corsproxy.io/?${target}`,
-    `https://proxy.cors.sh/${target}`,
-    target // tenta direto por último (funciona em alguns contextos)
-  ];
-
-  let lastError = null;
-  for(const proxyUrl of proxies){
-    try{
-      const r = await fetch(proxyUrl, {method:'POST', headers, body:bodyStr});
-      if(!r.ok) continue;
-      const d = await r.json();
-      if(d.error) throw new Error(d.error.message||'Erro na API');
-      const text = d.content?.map(b=>b.text||'').join('')||'';
-      if(text) return text;
-    } catch(e){ lastError=e; continue; }
-  }
-  throw new Error('Não foi possível conectar. Tente hospedar o arquivo em vez de abrir localmente.');
+  const r=await fetch('https://api.anthropic.com/v1/messages',{
+    method:'POST',
+    headers:{
+      'Content-Type':'application/json',
+      'x-api-key':key,
+      'anthropic-version':'2023-06-01',
+      'anthropic-dangerous-direct-browser-access':'true'
+    },
+    body:JSON.stringify(body)
+  });
+  const d=await r.json();
+  if(d.error) throw new Error(d.error.message||'Erro na API');
+  return d.content?.map(b=>b.text||'').join('')||'';
 }
 function parseJSON(t){ try{ return JSON.parse(t.replace(/```json|```/g,'').trim()); }catch{ return null; } }
 function copyEl(id){ navigator.clipboard.writeText(document.getElementById(id).textContent).then(()=>toast('📋 Copiado!')); }
