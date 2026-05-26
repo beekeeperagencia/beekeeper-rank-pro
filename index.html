@@ -9,11 +9,14 @@
 :root{--bg:#0b0b12;--bg2:#13131e;--bg3:#1c1c2a;--border:rgba(255,255,255,0.07);--accent:#f5a623;--accent2:#00e5a0;--accent3:#ff6b6b;--accent4:#ffb347;--text:#f0f0f8;--muted:#6b6b8a;--card:#15151f;--sidebar:#0f0f18;}
 *{box-sizing:border-box;margin:0;padding:0;}
 body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;height:100vh;display:flex;flex-direction:column;overflow:hidden;}
-.topbar{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;border-bottom:1px solid var(--border);background:var(--sidebar);flex-shrink:0;}
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:10px 20px;border-bottom:1px solid var(--border);background:var(--sidebar);flex-shrink:0;}
 .logo{font-family:'Syne',sans-serif;font-weight:800;font-size:17px;letter-spacing:-.5px;}
 .logo span{color:var(--accent);}
 .badge{background:rgba(245,166,35,0.15);color:var(--accent);border:1px solid rgba(245,166,35,0.3);border-radius:20px;font-size:10px;font-weight:600;padding:3px 10px;}
 .topbar-right{display:flex;align-items:center;gap:8px;}
+/* CREDIT COUNTER */
+.credit-counter{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:5px 12px;font-size:11px;display:flex;align-items:center;gap:6px;}
+.credit-val{font-family:'Syne',sans-serif;font-weight:700;color:var(--accent2);}
 .layout{display:flex;flex:1;overflow:hidden;}
 .sidebar{width:220px;background:var(--sidebar);border-right:1px solid var(--border);display:flex;flex-direction:column;flex-shrink:0;}
 .sidebar-head{padding:14px 14px 10px;border-bottom:1px solid var(--border);}
@@ -30,7 +33,7 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;hei
 .content{flex:1;overflow-y:auto;display:flex;flex-direction:column;}
 .client-view{display:none;flex-direction:column;height:100%;}
 .client-view.show{display:flex;}
-.client-header{padding:16px 22px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
+.client-header{padding:14px 22px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
 .client-header-left h2{font-family:'Syne',sans-serif;font-size:18px;font-weight:800;}
 .client-header-left p{font-size:12px;color:var(--muted);margin-top:2px;}
 .client-header-right{display:flex;gap:8px;}
@@ -51,7 +54,7 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;hei
 .inp::placeholder{color:var(--muted);}
 textarea.inp{resize:vertical;min-height:80px;}
 .cols2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-.btn{font-family:'Syne',sans-serif;font-weight:700;font-size:12px;letter-spacing:.03em;padding:10px 18px;border-radius:8px;border:none;cursor:pointer;transition:all .2s;white-space:nowrap;}
+.btn{font-family:'Syne',sans-serif;font-weight:700;font-size:12px;letter-spacing:.03em;padding:10px 18px;border-radius:8px;border:none;cursor:pointer;transition:all .2s;white-space:nowrap;display:inline-flex;align-items:center;gap:6px;}
 .btn-primary{background:var(--accent);color:#000;}
 .btn-primary:hover{background:#f7b84b;}
 .btn-primary:disabled{opacity:.5;cursor:not-allowed;}
@@ -61,11 +64,12 @@ textarea.inp{resize:vertical;min-height:80px;}
 .btn-green:hover{background:#00ffb3;}
 .btn-danger{background:rgba(255,107,107,0.15);color:var(--accent3);border:1px solid rgba(255,107,107,0.25);}
 .btn-sm{padding:7px 13px;font-size:11px;}
-.btn-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;}
+.btn-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;align-items:center;}
 .metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-bottom:16px;}
-.metric{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center;}
+.metric{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center;position:relative;}
 .metric-val{font-family:'Syne',sans-serif;font-weight:800;font-size:24px;margin-bottom:3px;}
 .metric-label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;}
+.metric-fix{font-size:10px;color:var(--accent2);margin-top:4px;cursor:pointer;text-decoration:underline;}
 .c-yellow{color:var(--accent);}.c-green{color:var(--accent2);}.c-red{color:var(--accent3);}.c-orange{color:var(--accent4);}
 .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;}
 .tag{font-size:11px;padding:3px 10px;border-radius:20px;border:1px solid;}
@@ -76,6 +80,7 @@ textarea.inp{resize:vertical;min-height:80px;}
 .result-block{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:14px;margin-top:10px;}
 .result-text{font-size:13px;line-height:1.75;color:var(--text);white-space:pre-wrap;}
 .loading{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:13px;padding:16px 0;}
+.loading-text{font-size:12px;color:var(--muted);}
 .spinner{width:16px;height:16px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0;}
 @keyframes spin{to{transform:rotate(360deg);}}
 .page-item{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:12px 15px;display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:8px;cursor:pointer;transition:border-color .2s;}
@@ -104,8 +109,37 @@ textarea.inp{resize:vertical;min-height:80px;}
 .api-inp{width:100%;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:12px 16px;color:var(--text);font-family:monospace;font-size:13px;outline:none;margin-bottom:12px;transition:border .2s;}
 .api-inp:focus{border-color:var(--accent);}
 .alert-warn{background:rgba(245,166,35,0.1);border:1px solid rgba(245,166,35,0.25);border-radius:8px;padding:12px 14px;font-size:12px;color:var(--accent);margin-bottom:16px;text-align:left;}
-.toast{position:fixed;bottom:24px;right:24px;background:var(--accent);color:#000;font-family:'Syne',sans-serif;font-weight:700;font-size:13px;padding:12px 20px;border-radius:10px;z-index:999;display:none;animation:fadeIn .3s;}
-@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.toast{position:fixed;bottom:24px;right:24px;background:var(--accent);color:#000;font-family:'Syne',sans-serif;font-weight:700;font-size:13px;padding:12px 20px;border-radius:10px;z-index:999;display:none;}
+/* GAPS PRIORIZADOS */
+.gap-item{border-radius:10px;padding:14px 16px;margin-bottom:10px;border:1px solid;}
+.gap-high{background:rgba(255,107,107,0.08);border-color:rgba(255,107,107,0.25);}
+.gap-med{background:rgba(255,179,71,0.08);border-color:rgba(255,179,71,0.25);}
+.gap-low{background:rgba(0,229,160,0.06);border-color:rgba(0,229,160,0.2);}
+.gap-badge{font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px;letter-spacing:.05em;margin-bottom:6px;display:inline-block;}
+.gap-badge-high{background:rgba(255,107,107,0.2);color:var(--accent3);}
+.gap-badge-med{background:rgba(255,179,71,0.2);color:var(--accent4);}
+.gap-badge-low{background:rgba(0,229,160,0.2);color:var(--accent2);}
+.gap-title{font-size:13px;font-weight:600;margin-bottom:4px;color:var(--text);}
+.gap-solution{font-size:12px;color:var(--muted);line-height:1.6;}
+.gap-action{margin-top:8px;}
+/* SCORE DETAIL */
+.score-detail{border-radius:10px;padding:14px 16px;margin-bottom:10px;border:1px solid var(--border);background:var(--bg2);}
+.score-detail-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;}
+.score-detail-name{font-family:'Syne',sans-serif;font-weight:700;font-size:13px;}
+.score-detail-val{font-family:'Syne',sans-serif;font-weight:800;font-size:18px;}
+.score-bar{height:6px;background:var(--bg3);border-radius:3px;margin-bottom:10px;overflow:hidden;}
+.score-bar-fill{height:100%;border-radius:3px;transition:width .6s ease;}
+.score-actions{font-size:12px;color:var(--muted);line-height:1.7;}
+.score-actions li{margin-left:16px;margin-bottom:3px;}
+/* SERVICE CARDS */
+.service-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;margin-bottom:14px;}
+.service-card{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:14px;transition:border-color .2s;}
+.service-card:hover{border-color:rgba(245,166,35,0.4);}
+.service-card-name{font-family:'Syne',sans-serif;font-weight:700;font-size:13px;margin-bottom:6px;}
+.service-card-desc{font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:10px;}
+.service-card-stats{font-size:11px;color:var(--muted);margin-bottom:10px;}
+/* NOTIFICACAO SITE LIDO */
+.site-read-badge{background:rgba(0,229,160,0.1);border:1px solid rgba(0,229,160,0.25);border-radius:8px;padding:8px 14px;font-size:12px;color:var(--accent2);display:flex;align-items:center;gap:8px;margin-bottom:14px;}
 </style>
 </head>
 <body>
@@ -124,7 +158,7 @@ textarea.inp{resize:vertical;min-height:80px;}
     </div>
     <div class="alert-warn">🔒 Sua chave fica salva apenas no seu navegador. Nunca é enviada a nenhum servidor além da Anthropic.</div>
     <input class="api-inp" id="api-key-input" type="password" placeholder="sk-ant-api03-..." />
-    <button class="btn btn-primary" style="width:100%;padding:14px;font-size:14px;" onclick="saveApiKey()">🐝 Entrar no Beekeeper Rank Pro</button>
+    <button class="btn btn-primary" style="width:100%;padding:14px;font-size:14px;justify-content:center;" onclick="saveApiKey()">🐝 Entrar no Beekeeper Rank Pro</button>
     <p style="font-size:11px;color:var(--muted);margin-top:12px;">Você pode atualizar sua chave a qualquer momento clicando em ⚙️ API Key no topo.</p>
   </div>
 </div>
@@ -133,10 +167,11 @@ textarea.inp{resize:vertical;min-height:80px;}
 <div class="topbar">
   <div class="logo">🐝 Bee<span>keeper</span> Rank Pro</div>
   <div class="topbar-right">
-    <span class="badge">🐝 Powered by Claude AI</span>
+    <div class="credit-counter" title="Estimativa de gastos com API hoje">💰 <span class="credit-val" id="credit-display">R$ 0,00</span> <span style="color:var(--muted)">hoje</span></div>
+    <span class="badge">🐝 Claude AI</span>
     <button class="btn btn-outline btn-sm" onclick="openSettings()">⚙️ API Key</button>
-    <button class="btn btn-outline btn-sm" onclick="exportData()">💾 Exportar Dados</button>
-    <button class="btn btn-outline btn-sm" onclick="importData()">📂 Importar Dados</button>
+    <button class="btn btn-outline btn-sm" onclick="exportData()">💾 Exportar</button>
+    <button class="btn btn-outline btn-sm" onclick="importData()">📂 Importar</button>
   </div>
 </div>
 
@@ -156,7 +191,7 @@ textarea.inp{resize:vertical;min-height:80px;}
     <div id="welcome" style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px;">
       <div style="font-size:52px;margin-bottom:16px;">🐝</div>
       <h2 style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;margin-bottom:10px;">Bem-vindo ao Beekeeper Rank Pro</h2>
-      <p style="color:var(--muted);font-size:14px;max-width:340px;line-height:1.7;">Crie seu primeiro cliente na barra lateral para começar a gerar páginas, keywords e relatórios com IA.</p>
+      <p style="color:var(--muted);font-size:14px;max-width:340px;line-height:1.7;">Crie seu primeiro cliente para começar a gerar páginas, keywords e relatórios com IA.</p>
     </div>
 
     <div class="client-view" id="client-view">
@@ -198,21 +233,48 @@ textarea.inp{resize:vertical;min-height:80px;}
         <div class="tab-pane" id="pane-scanner">
           <div class="card">
             <div class="card-title">🔍 AI Brand Scanner</div>
-            <div class="card-sub">Escaneie o site do cliente para extrair serviços, posicionamento e oportunidades</div>
-            <div class="field"><label>URL do Site</label><input class="inp" id="sc-url" placeholder="https://seucliente.com.br"/></div>
+            <div class="card-sub">A IA lê o conteúdo real do site e gera diagnóstico completo com soluções</div>
+            <div id="sc-last-scan" style="display:none" class="site-read-badge">
+              ✅ Site lido em: <span id="sc-last-scan-date"></span> &nbsp;·&nbsp; <span style="color:var(--muted);cursor:pointer;text-decoration:underline;" onclick="runScanner(true)">Re-escanear</span>
+            </div>
+            <div class="field"><label>URL do Site *</label><input class="inp" id="sc-url" placeholder="https://seucliente.com.br"/></div>
             <div class="cols2">
               <div class="field"><label>Cidade Principal</label><input class="inp" id="sc-city" placeholder="Ex: Goiânia"/></div>
-              <div class="field"><label>Segmento</label><input class="inp" id="sc-segment" placeholder="Ex: Marketing Digital"/></div>
+              <div class="field"><label>Segmento</label><input class="inp" id="sc-segment" placeholder="Ex: Centro Automotivo"/></div>
             </div>
-            <div class="field"><label>Descrição do Negócio</label><textarea class="inp" id="sc-desc" placeholder="Descreva brevemente o negócio do cliente..."></textarea></div>
-            <div class="btn-row"><button class="btn btn-primary" id="btn-scan" onclick="runScanner()">⚡ Escanear Marca</button></div>
+            <div class="field"><label>Descrição do Negócio (opcional — complementa a leitura do site)</label><textarea class="inp" id="sc-desc" placeholder="Adicione informações que não estão no site..."></textarea></div>
+            <div class="btn-row">
+              <button class="btn btn-primary" id="btn-scan" onclick="runScanner(false)">⚡ Ler Site e Escanear</button>
+            </div>
           </div>
-          <div class="loading" id="sc-loading" style="display:none"><div class="spinner"></div>Analisando marca com IA...</div>
+          <div class="loading" id="sc-loading" style="display:none">
+            <div class="spinner"></div>
+            <div>
+              <div style="font-size:13px;color:var(--muted)" id="sc-loading-text">Lendo o site...</div>
+              <div style="font-size:11px;color:var(--muted);margin-top:2px;">Isso pode levar 10-20 segundos</div>
+            </div>
+          </div>
           <div id="sc-result" style="display:none">
-            <div class="metrics" id="sc-metrics"></div>
-            <div id="sc-services" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;margin-bottom:14px;"></div>
-            <div class="card"><div class="card-title">Posicionamento Detectado</div><div class="result-block"><div class="result-text" id="sc-positioning"></div></div></div>
-            <div class="card"><div class="card-title">🚨 Pontos Cegos & Oportunidades</div><div class="result-block"><div class="result-text" id="sc-gaps"></div></div></div>
+            <!-- Score Details com soluções -->
+            <div class="card">
+              <div class="card-title">📊 Diagnóstico com Soluções</div>
+              <div class="card-sub">Para cada score baixo, veja exatamente o que fazer</div>
+              <div id="sc-score-details"></div>
+            </div>
+            <!-- Serviços -->
+            <div class="card">
+              <div class="card-title">🐝 Serviços Detectados</div>
+              <div class="card-sub">Clique em um serviço para gerar keywords automaticamente</div>
+              <div class="service-grid" id="sc-services"></div>
+            </div>
+            <!-- Pontos Cegos priorizados -->
+            <div class="card">
+              <div class="card-title">🚨 Pontos Cegos & Oportunidades</div>
+              <div class="card-sub">Priorizados por impacto — comece pelo vermelho</div>
+              <div id="sc-gaps"></div>
+            </div>
+            <!-- Posicionamento -->
+            <div class="card"><div class="card-title">🎯 Posicionamento Atual</div><div class="result-block"><div class="result-text" id="sc-positioning"></div></div></div>
           </div>
         </div>
 
@@ -225,7 +287,7 @@ textarea.inp{resize:vertical;min-height:80px;}
               <div class="field"><label>Serviço</label><input class="inp" id="kw-service" placeholder="Ex: Tráfego Pago"/></div>
               <div class="field"><label>Cidades</label><input class="inp" id="kw-cities" placeholder="Ex: Goiânia, Aparecida"/></div>
             </div>
-            <div class="field"><label>Público-alvo</label><input class="inp" id="kw-audience" placeholder="Ex: Pequenas empresas locais"/></div>
+            <div class="field"><label>Público-alvo</label><input class="inp" id="kw-audience" placeholder="Ex: Donos de veículos em Goiânia"/></div>
             <div class="btn-row"><button class="btn btn-primary" id="btn-kw" onclick="runKeywords()">✨ Gerar Tudo</button></div>
           </div>
           <div class="loading" id="kw-loading" style="display:none"><div class="spinner"></div>Gerando keywords e ângulos...</div>
@@ -246,8 +308,8 @@ textarea.inp{resize:vertical;min-height:80px;}
             <div class="card-title">📄 Gerador de Páginas Localizadas</div>
             <div class="card-sub">SEO programático em escala — títulos otimizados por cidade</div>
             <div class="cols2">
-              <div class="field"><label>Serviço</label><input class="inp" id="pg-service" placeholder="Ex: Tráfego Pago"/></div>
-              <div class="field"><label>Nome da Marca</label><input class="inp" id="pg-brand" placeholder="Ex: Beekeeper Agência"/></div>
+              <div class="field"><label>Serviço</label><input class="inp" id="pg-service" placeholder="Ex: Alinhamento 3D"/></div>
+              <div class="field"><label>Nome da Marca</label><input class="inp" id="pg-brand" placeholder="Ex: Marrom Motors"/></div>
             </div>
             <div class="field"><label>Cidades (separadas por vírgula)</label><input class="inp" id="pg-cities" placeholder="Ex: Goiânia, Aparecida de Goiânia, Anápolis"/></div>
             <div class="btn-row"><button class="btn btn-primary" id="btn-pg" onclick="runPages()">📄 Gerar Títulos & Scores</button></div>
@@ -260,7 +322,10 @@ textarea.inp{resize:vertical;min-height:80px;}
               <div class="card">
                 <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
                   <div class="card-title" id="pg-content-title"></div>
-                  <button class="btn btn-outline btn-sm" onclick="copyEl('pg-content-text')">Copiar</button>
+                  <div style="display:flex;gap:8px;">
+                    <button class="btn btn-outline btn-sm" onclick="copyEl('pg-content-text')">Copiar Texto</button>
+                    <button class="btn btn-outline btn-sm" onclick="copyHTML()">Copiar HTML</button>
+                  </div>
                 </div>
                 <div class="result-block"><div class="result-text" id="pg-content-text"></div></div>
               </div>
@@ -272,10 +337,10 @@ textarea.inp{resize:vertical;min-height:80px;}
         <div class="tab-pane" id="pane-geo">
           <div class="card">
             <div class="card-title">🤖 Monitor GEO & AEO</div>
-            <div class="card-sub">Analise a visibilidade do cliente nas IAs e snippets do Google</div>
+            <div class="card-sub">Analise como as IAs respondem sobre o nicho do cliente</div>
             <div class="cols2">
-              <div class="field"><label>Nome da Marca</label><input class="inp" id="geo-brand" placeholder="Ex: Beekeeper Agência"/></div>
-              <div class="field"><label>Nicho + Cidade</label><input class="inp" id="geo-niche" placeholder="Ex: Agência marketing Goiânia"/></div>
+              <div class="field"><label>Nome da Marca</label><input class="inp" id="geo-brand" placeholder="Ex: Marrom Motors"/></div>
+              <div class="field"><label>Nicho + Cidade</label><input class="inp" id="geo-niche" placeholder="Ex: Centro Automotivo em Goiânia"/></div>
             </div>
             <div class="btn-row"><button class="btn btn-primary" id="btn-geo" onclick="runGeo()">🤖 Analisar Visibilidade</button></div>
           </div>
@@ -283,8 +348,8 @@ textarea.inp{resize:vertical;min-height:80px;}
           <div id="geo-result" style="display:none">
             <div class="metrics" id="geo-metrics"></div>
             <div class="card"><div class="card-title">🔎 Prompts que o público usa nas IAs</div><div class="tags" id="geo-ptags"></div></div>
-            <div class="card"><div class="card-title">📋 Como a IA responderia</div><div class="result-block"><div class="result-text" id="geo-sim"></div></div></div>
-            <div class="card"><div class="card-title">✅ O que otimizar para aparecer nas IAs</div><div class="result-block"><div class="result-text" id="geo-tips"></div></div></div>
+            <div class="card"><div class="card-title">📋 Como a IA responderia sobre este nicho</div><div class="result-block"><div class="result-text" id="geo-sim"></div></div></div>
+            <div class="card"><div class="card-title">✅ O que fazer para aparecer nas IAs</div><div class="result-block"><div class="result-text" id="geo-tips"></div></div></div>
           </div>
         </div>
 
@@ -331,10 +396,10 @@ textarea.inp{resize:vertical;min-height:80px;}
 <div class="modal-bg" id="modal-client" style="display:none">
   <div class="modal">
     <h3 id="modal-client-title">🐝 Novo Cliente</h3>
-    <div class="field"><label>Nome do Cliente / Empresa *</label><input class="inp" id="m-name" placeholder="Ex: Beekeeper Agência de Marketing"/></div>
+    <div class="field"><label>Nome do Cliente / Empresa *</label><input class="inp" id="m-name" placeholder="Ex: Marrom Motors Centro Automotivo"/></div>
     <div class="cols2">
       <div class="field"><label>Site</label><input class="inp" id="m-url" placeholder="https://site.com.br"/></div>
-      <div class="field"><label>Segmento</label><input class="inp" id="m-segment" placeholder="Ex: Marketing Digital"/></div>
+      <div class="field"><label>Segmento</label><input class="inp" id="m-segment" placeholder="Ex: Centro Automotivo"/></div>
     </div>
     <div class="cols2">
       <div class="field"><label>Cidade Principal</label><input class="inp" id="m-city" placeholder="Ex: Goiânia"/></div>
@@ -353,7 +418,7 @@ textarea.inp{resize:vertical;min-height:80px;}
   <div class="modal">
     <h3>⚙️ Configurações</h3>
     <div class="field"><label>Anthropic API Key</label><input class="api-inp inp" id="settings-api-key" type="password" placeholder="sk-ant-api03-..."/></div>
-    <div class="alert-warn" style="margin-top:8px;">🔒 Sua chave é salva apenas localmente no seu navegador.</div>
+    <div class="alert-warn" style="margin-top:8px;">🔒 Chave salva apenas localmente no seu navegador.</div>
     <div class="modal-footer">
       <button class="btn btn-outline" onclick="closeModal('modal-settings')">Cancelar</button>
       <button class="btn btn-primary" onclick="updateApiKey()">Salvar</button>
@@ -361,7 +426,6 @@ textarea.inp{resize:vertical;min-height:80px;}
   </div>
 </div>
 
-<!-- TOAST -->
 <div class="toast" id="toast"></div>
 
 <script>
@@ -370,11 +434,40 @@ let clients = {};
 let currentClientId = null;
 let selectedPageTitle = '';
 let editingClientId = null;
-const STORAGE_KEY = 'beekeeper_rank_clients';
+let lastGeneratedContent = '';
+const STORAGE_KEY = 'beekeeper_rank_clients_v6';
 const API_KEY_STORAGE = 'beekeeper_rank_apikey';
+const CREDITS_KEY = 'beekeeper_credits_today';
 
 // ===== TOAST =====
-function toast(msg){ const t=document.getElementById('toast'); t.textContent=msg; t.style.display='block'; setTimeout(()=>t.style.display='none',2500); }
+function toast(msg, dur=2500){ const t=document.getElementById('toast'); t.textContent=msg; t.style.display='block'; setTimeout(()=>t.style.display='none',dur); }
+
+// ===== CREDITS COUNTER =====
+// Estimativa: claude-sonnet-4-5 custa ~$0.003 por 1K tokens input, ~$0.015 por 1K output
+// Média de ~500 tokens input + ~800 tokens output por chamada = ~$0.015 por chamada ≈ R$0.08
+let creditsToday = 0;
+const COST_PER_CALL_BRL = 0.08;
+
+function loadCredits(){
+  try{
+    const saved = JSON.parse(localStorage.getItem(CREDITS_KEY)||'{}');
+    const today = new Date().toDateString();
+    if(saved.date === today) creditsToday = saved.value || 0;
+    else creditsToday = 0;
+  }catch(e){ creditsToday=0; }
+  updateCreditDisplay();
+}
+
+function addCredit(){
+  creditsToday += COST_PER_CALL_BRL;
+  localStorage.setItem(CREDITS_KEY, JSON.stringify({date:new Date().toDateString(), value:creditsToday}));
+  updateCreditDisplay();
+}
+
+function updateCreditDisplay(){
+  const el = document.getElementById('credit-display');
+  if(el) el.textContent = 'R$ '+creditsToday.toFixed(2);
+}
 
 // ===== API KEY =====
 function getApiKey(){ return localStorage.getItem(API_KEY_STORAGE)||''; }
@@ -383,7 +476,7 @@ function saveApiKey(){
   if(!k.startsWith('sk-')){ alert('Chave inválida. Deve começar com sk-ant-...'); return; }
   localStorage.setItem(API_KEY_STORAGE,k);
   document.getElementById('setup-screen').style.display='none';
-  toast('🐝 API Key salva! Bem-vindo ao Beekeeper Rank Pro!');
+  toast('🐝 Bem-vindo ao Beekeeper Rank Pro!');
 }
 function updateApiKey(){
   const k=document.getElementById('settings-api-key').value.trim();
@@ -394,30 +487,41 @@ function openSettings(){ document.getElementById('settings-api-key').value=getAp
 
 // ===== STORAGE =====
 function loadClients(){ try{ const d=localStorage.getItem(STORAGE_KEY); if(d) clients=JSON.parse(d); }catch(e){ clients={}; } renderSidebar(); }
-function saveClients(){ try{ localStorage.setItem(STORAGE_KEY,JSON.stringify(clients)); }catch(e){ alert('Erro ao salvar dados.'); } }
+function saveClients(){
+  try{
+    const data=JSON.stringify(clients);
+    localStorage.setItem(STORAGE_KEY,data);
+    sessionStorage.setItem('beekeeper_backup',data);
+    localStorage.setItem('beekeeper_last_save',new Date().toISOString());
+  }catch(e){ alert('Erro ao salvar: '+e.message); }
+}
 
 // ===== EXPORT / IMPORT =====
 function exportData(){
   const blob=new Blob([JSON.stringify(clients,null,2)],{type:'application/json'});
   const a=document.createElement('a'); a.href=URL.createObjectURL(blob);
-  a.download='beekeeper-rank-backup-'+new Date().toISOString().slice(0,10)+'.json'; a.click();
+  a.download='beekeeper-backup-'+new Date().toISOString().slice(0,10)+'.json'; a.click();
+  localStorage.setItem('beekeeper_last_export',new Date().toISOString());
   toast('💾 Backup exportado!');
 }
 function importData(){
   const inp=document.createElement('input'); inp.type='file'; inp.accept='.json';
-  inp.onchange=e=>{ const f=e.target.files[0]; if(!f) return; const r=new FileReader();
-    r.onload=ev=>{ try{ clients=JSON.parse(ev.target.result); saveClients(); renderSidebar(); toast('📂 Dados importados com sucesso!'); }catch(e){ alert('Arquivo inválido.'); } };
-    r.readAsText(f); };
+  inp.onchange=e=>{
+    const f=e.target.files[0]; if(!f) return;
+    const r=new FileReader();
+    r.onload=ev=>{ try{ clients=JSON.parse(ev.target.result); saveClients(); renderSidebar(); toast('📂 Dados importados!'); }catch(e){ alert('Arquivo inválido.'); } };
+    r.readAsText(f);
+  };
   inp.click();
 }
 
 // ===== CLIENT CRUD =====
 function openNewClient(){ editingClientId=null; document.getElementById('modal-client-title').textContent='🐝 Novo Cliente'; clearModalClient(); document.getElementById('modal-client').style.display='flex'; }
-function editClient(){ if(!currentClientId) return; const c=clients[currentClientId]; editingClientId=currentClientId; document.getElementById('modal-client-title').textContent='✏️ Editar Cliente'; document.getElementById('m-name').value=c.name||''; document.getElementById('m-url').value=c.url||''; document.getElementById('m-segment').value=c.segment||''; document.getElementById('m-city').value=c.city||''; document.getElementById('m-owner').value=c.owner||''; document.getElementById('m-notes').value=c.notes||''; document.getElementById('modal-client').style.display='flex'; }
+function editClient(){ if(!currentClientId) return; const c=clients[currentClientId]; editingClientId=currentClientId; document.getElementById('modal-client-title').textContent='✏️ Editar'; document.getElementById('m-name').value=c.name||''; document.getElementById('m-url').value=c.url||''; document.getElementById('m-segment').value=c.segment||''; document.getElementById('m-city').value=c.city||''; document.getElementById('m-owner').value=c.owner||''; document.getElementById('m-notes').value=c.notes||''; document.getElementById('modal-client').style.display='flex'; }
 function clearModalClient(){ ['m-name','m-url','m-segment','m-city','m-owner','m-notes'].forEach(id=>document.getElementById(id).value=''); }
 function closeModal(id){ document.getElementById(id).style.display='none'; editingClientId=null; }
 function saveClient(){
-  const name=document.getElementById('m-name').value.trim(); if(!name){ alert('Informe o nome do cliente.'); return; }
+  const name=document.getElementById('m-name').value.trim(); if(!name){ alert('Informe o nome.'); return; }
   const id=editingClientId||'c_'+Date.now(); const ex=editingClientId?(clients[editingClientId]||{}):{};
   clients[id]={...ex,id,name,url:document.getElementById('m-url').value.trim(),segment:document.getElementById('m-segment').value.trim(),city:document.getElementById('m-city').value.trim(),owner:document.getElementById('m-owner').value.trim(),notes:document.getElementById('m-notes').value.trim(),createdAt:ex.createdAt||new Date().toISOString(),updatedAt:new Date().toISOString(),seoScore:ex.seoScore||null,geoScore:ex.geoScore||null,aeoScore:ex.aeoScore||null,services:ex.services||[],keywords:ex.keywords||{},pages:ex.pages||[],reports:ex.reports||[],history:ex.history||[]};
   saveClients(); closeModal('modal-client'); renderSidebar(); selectClient(id); toast('✅ Cliente salvo!');
@@ -447,10 +551,13 @@ function selectClient(id){
   if(c.city){ document.getElementById('sc-city').value=c.city; document.getElementById('kw-cities').value=c.city; document.getElementById('pg-cities').value=c.city; document.getElementById('geo-niche').value=(c.segment||'')+' em '+(c.city||''); }
   if(c.name){ document.getElementById('pg-brand').value=c.name; document.getElementById('geo-brand').value=c.name; document.getElementById('rep-client').value=c.name; }
   if(c.segment) document.getElementById('sc-segment').value=c.segment;
-  if(c.services?.length){ document.getElementById('ov-services-card').style.display='block'; document.getElementById('ov-services').innerHTML=c.services.map(s=>`<div style="padding:8px 0;border-bottom:1px solid var(--border);font-size:13px;"><b>${s.name}</b><span style="color:var(--muted);font-size:11px;margin-left:8px;">${s.keywords_count} kw · ${s.problems_count} prob</span></div>`).join(''); }
+  if(c.services?.length){ document.getElementById('ov-services-card').style.display='block'; document.getElementById('ov-services').innerHTML=c.services.map(s=>`<div style="padding:8px 0;border-bottom:1px solid var(--border);font-size:13px;"><b>${s.name}</b><span style="color:var(--muted);font-size:11px;margin-left:8px;">${s.keywords_count||25} kw</span></div>`).join(''); }
   renderHistory(); renderSavedReports();
   ['sc-result','kw-result','pg-result','geo-result','rep-result'].forEach(id=>{const el=document.getElementById(id);if(el)el.style.display='none';});
   document.getElementById('rep-period').value=new Date().toLocaleDateString('pt-BR',{month:'long',year:'numeric'});
+  // Restaurar scan salvo
+  if(c.scanData){ setTimeout(()=>renderScanResult(c.scanData,c),100); }
+  else{ document.getElementById('sc-last-scan').style.display='none'; }
   switchTab('overview');
 }
 
@@ -485,58 +592,247 @@ function renderSavedReports(){
 }
 function showSavedReport(i){ const r=clients[currentClientId].reports[i]; document.getElementById('rep-text').textContent=r.content; document.getElementById('rep-result').style.display='block'; }
 
-// ===== CLAUDE API (direct browser access) =====
-async function callClaude(prompt, sys=''){
+// ===== CLAUDE API =====
+async function callClaude(prompt, sys='', maxTokens=1500){
   const key=getApiKey();
-  if(!key){ alert('Configure sua API Key primeiro (botão ⚙️ no topo).'); throw new Error('no key'); }
-  const body={model:'claude-sonnet-4-5',max_tokens:1500,messages:[{role:'user',content:prompt}]};
+  if(!key){ alert('Configure sua API Key primeiro.'); throw new Error('no key'); }
+  const body={model:'claude-sonnet-4-5',max_tokens:maxTokens,messages:[{role:'user',content:prompt}]};
   if(sys) body.system=sys;
   const r=await fetch('https://api.anthropic.com/v1/messages',{
     method:'POST',
-    headers:{
-      'Content-Type':'application/json',
-      'x-api-key':key,
-      'anthropic-version':'2023-06-01',
-      'anthropic-dangerous-direct-browser-access':'true'
-    },
+    headers:{'Content-Type':'application/json','x-api-key':key,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
     body:JSON.stringify(body)
   });
   const d=await r.json();
   if(d.error) throw new Error(d.error.message||'Erro na API');
+  addCredit();
   return d.content?.map(b=>b.text||'').join('')||'';
 }
-function parseJSON(t){ try{ return JSON.parse(t.replace(/```json|```/g,'').trim()); }catch{ return null; } }
+
+// ===== FETCH SITE REAL =====
+async function fetchSiteContent(url){
+  try{
+    // Tenta ler o site via proxy público de texto
+    const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`;
+    const r = await fetch(proxyUrl);
+    const d = await r.json();
+    if(d.contents){
+      // Extrair texto limpo do HTML
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(d.contents, 'text/html');
+      // Remover scripts, styles, nav, footer
+      ['script','style','nav','footer','header'].forEach(tag=>{ doc.querySelectorAll(tag).forEach(el=>el.remove()); });
+      const text = doc.body?.innerText || doc.body?.textContent || '';
+      // Limitar a 3000 caracteres para não estourar o contexto
+      return text.replace(/\s+/g,' ').trim().substring(0,3000);
+    }
+  }catch(e){ console.log('Fetch site falhou:',e); }
+  return '';
+}
+
+function parseJSON(t){
+  try{
+    // Remove markdown code blocks
+    let clean = t.replace(/```json|```/g,'').trim();
+    // Remove possíveis caracteres antes do {
+    const start = clean.indexOf('{');
+    const end = clean.lastIndexOf('}');
+    if(start !== -1 && end !== -1) clean = clean.substring(start, end+1);
+    return JSON.parse(clean);
+  }catch(e){
+    // Tenta extrair JSON parcial
+    try{
+      const match = t.match(/\{[\s\S]*\}/);
+      if(match) return JSON.parse(match[0]);
+    }catch(e2){}
+    console.error('JSON parse error:', e.message, t.substring(0,200));
+    return null;
+  }
+}
 function copyEl(id){ navigator.clipboard.writeText(document.getElementById(id).textContent).then(()=>toast('📋 Copiado!')); }
+function copyHTML(){
+  // Converte o texto em HTML básico com h1, h2, p
+  const text = lastGeneratedContent;
+  let html = text
+    .split('\n')
+    .map(line=>{
+      line = line.trim();
+      if(!line) return '';
+      if(line.startsWith('# ')) return `<h1>${line.replace('# ','')}</h1>`;
+      if(line.startsWith('## ')) return `<h2>${line.replace('## ','')}</h2>`;
+      if(line.startsWith('### ')) return `<h3>${line.replace('### ','')}</h3>`;
+      if(line.startsWith('**') && line.endsWith('**')) return `<strong>${line.replace(/\*\*/g,'')}</strong>`;
+      return `<p>${line}</p>`;
+    })
+    .filter(Boolean)
+    .join('\n');
+  navigator.clipboard.writeText(html).then(()=>toast('📋 HTML copiado! Cole no WordPress.'));
+}
+
+// ===== RENDER SCAN RESULT =====
+function renderScanResult(d, c){
+  // Scores com detalhes e soluções
+  const scores = [
+    { key:'seo_score', label:'SEO Score', color:'#f5a623', solutions: d.seo_solutions||[] },
+    { key:'geo_score', label:'GEO Visibility', color:'#00e5a0', solutions: d.geo_solutions||[] },
+    { key:'aeo_score', label:'AEO Score', color:'#ffb347', solutions: d.aeo_solutions||[] },
+  ];
+  document.getElementById('sc-score-details').innerHTML = scores.map(s=>{
+    const val = d[s.key]||0;
+    const barColor = val>=70?'#00e5a0':val>=50?'#ffb347':'#ff6b6b';
+    return `<div class="score-detail">
+      <div class="score-detail-header">
+        <div class="score-detail-name">${s.label}</div>
+        <div class="score-detail-val" style="color:${barColor}">${val}/100</div>
+      </div>
+      <div class="score-bar"><div class="score-bar-fill" style="width:${val}%;background:${barColor}"></div></div>
+      ${s.solutions.length?`<div class="score-actions"><b style="font-size:11px;color:var(--text);">✅ O que fazer para melhorar:</b><ul style="margin-top:6px;">${s.solutions.map(a=>`<li>${a}</li>`).join('')}</ul></div>`:''}
+    </div>`;
+  }).join('');
+
+  // Serviços com botão de keywords
+  document.getElementById('sc-services').innerHTML=(d.services||[]).map(s=>`
+    <div class="service-card">
+      <div class="service-card-name">🐝 ${s.name}</div>
+      <div class="service-card-desc">${s.description}</div>
+      <div class="service-card-stats">🏷️ ${s.keywords_count||25} kw &nbsp;😣 ${s.problems_count||10} prob &nbsp;🎯 ${s.angles_count||10} ângulos</div>
+      <button class="btn btn-outline btn-sm" onclick="goToKeywords('${s.name.replace(/'/g,"\\'")}')">→ Gerar Keywords</button>
+    </div>`).join('');
+
+  // Pontos cegos priorizados
+  const gaps = d.gaps_prioritized || [];
+  if(gaps.length){
+    document.getElementById('sc-gaps').innerHTML = gaps.map(g=>{
+      const cls = g.impact==='alto'?'high':g.impact==='médio'?'med':'low';
+      const label = g.impact==='alto'?'🔴 ALTO':g.impact==='médio'?'🟡 MÉDIO':'🟢 BAIXO';
+      return `<div class="gap-item gap-${cls}">
+        <div class="gap-badge gap-badge-${cls}">${label} IMPACTO</div>
+        <div class="gap-title">${g.title}</div>
+        <div class="gap-solution">💡 <b>Solução:</b> ${g.solution}</div>
+      </div>`;
+    }).join('');
+  } else {
+    // Fallback para formato antigo
+    document.getElementById('sc-gaps').innerHTML = `<div class="result-block"><div class="result-text">${d.gaps||'—'}</div></div>`;
+  }
+
+  document.getElementById('sc-positioning').textContent=d.positioning||'';
+  document.getElementById('sc-result').style.display='block';
+
+  // Overview metrics
+  document.getElementById('ov-seo').textContent=(d.seo_score||'—')+'/100';
+  document.getElementById('ov-geo').textContent=(d.geo_score||'—')+'/100';
+  document.getElementById('ov-aeo').textContent=(d.aeo_score||'—')+'/100';
+
+  // Último scan badge
+  if(c.scanDate){
+    document.getElementById('sc-last-scan-date').textContent=new Date(c.scanDate).toLocaleString('pt-BR');
+    document.getElementById('sc-last-scan').style.display='flex';
+  }
+
+  // Services overview
+  document.getElementById('ov-services-card').style.display='block';
+  document.getElementById('ov-services').innerHTML=(d.services||[]).map(s=>`<div style="padding:8px 0;border-bottom:1px solid var(--border);font-size:13px;"><b>${s.name}</b></div>`).join('');
+}
+
+// Ir para keywords com serviço selecionado
+function goToKeywords(serviceName){
+  document.getElementById('kw-service').value=serviceName;
+  document.getElementById('pg-service').value=serviceName;
+  switchTab('keywords');
+  toast('🏷️ Serviço "'+serviceName+'" selecionado — clique em Gerar Tudo!');
+}
 
 // ===== SCANNER =====
-async function runScanner(){
+async function runScanner(force=false){
   if(!currentClientId) return;
-  const url=document.getElementById('sc-url').value.trim(),city=document.getElementById('sc-city').value.trim()||'Brasil',seg=document.getElementById('sc-segment').value.trim()||'negócios locais',desc=document.getElementById('sc-desc').value.trim();
-  document.getElementById('btn-scan').disabled=true; document.getElementById('sc-loading').style.display='flex'; document.getElementById('sc-result').style.display='none';
+  const c=clients[currentClientId];
+  if(!force && c.scanData){ renderScanResult(c.scanData,c); toast('📋 Scan salvo exibido. Clique em Re-escanear para atualizar.'); return; }
+
+  const url=document.getElementById('sc-url').value.trim();
+  const city=document.getElementById('sc-city').value.trim()||'Brasil';
+  const seg=document.getElementById('sc-segment').value.trim()||'negócios';
+  const desc=document.getElementById('sc-desc').value.trim();
+  if(!url){ alert('Informe a URL do site.'); return; }
+
+  document.getElementById('btn-scan').disabled=true;
+  document.getElementById('sc-loading').style.display='flex';
+  document.getElementById('sc-result').style.display='none';
+
   try{
-    const raw=await callClaude(`AI Brand Scanner. URL:${url||'não informada'} Desc:${desc||'não informada'} Cidade:${city} Seg:${seg}\nRetorne APENAS JSON:\n{"brand_name":"","seo_score":45,"geo_score":20,"aeo_score":25,"da":15,"services":[{"name":"","description":"","keywords_count":25,"problems_count":10,"angles_count":10}],"positioning":"","gaps":""}`, 'Responda APENAS com JSON válido, sem texto extra.');
-    const d=parseJSON(raw); if(!d) throw new Error('JSON inválido');
-    const c=clients[currentClientId]; c.seoScore=d.seo_score; c.geoScore=d.geo_score; c.aeoScore=d.aeo_score; c.services=d.services||[]; saveClients();
-    document.getElementById('ov-seo').textContent=d.seo_score+'/100'; document.getElementById('ov-geo').textContent=d.geo_score+'/100'; document.getElementById('ov-aeo').textContent=d.aeo_score+'/100';
-    document.getElementById('sc-metrics').innerHTML=`<div class="metric"><div class="metric-val c-yellow">${d.seo_score}/100</div><div class="metric-label">SEO Score</div></div><div class="metric"><div class="metric-val c-green">${d.geo_score}/100</div><div class="metric-label">GEO Visibility</div></div><div class="metric"><div class="metric-val c-orange">${d.aeo_score}/100</div><div class="metric-label">AEO Score</div></div><div class="metric"><div class="metric-val c-red">${d.da}</div><div class="metric-label">Domain Authority</div></div>`;
-    document.getElementById('sc-services').innerHTML=(d.services||[]).map(s=>`<div style="background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:14px;"><div style="font-family:'Syne',sans-serif;font-weight:700;font-size:13px;margin-bottom:6px;">🐝 ${s.name}</div><div style="font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:8px;">${s.description}</div><div style="font-size:11px;color:var(--muted);">🏷️ ${s.keywords_count} kw &nbsp;😣 ${s.problems_count} prob &nbsp;🎯 ${s.angles_count} ângulos</div></div>`).join('');
-    document.getElementById('sc-positioning').textContent=d.positioning||''; document.getElementById('sc-gaps').textContent=d.gaps||''; document.getElementById('sc-result').style.display='block';
-    if(d.services?.length){ document.getElementById('kw-service').value=d.services[0].name; document.getElementById('pg-service').value=d.services[0].name; }
-    document.getElementById('ov-services-card').style.display='block'; document.getElementById('ov-services').innerHTML=c.services.map(s=>`<div style="padding:8px 0;border-bottom:1px solid var(--border);font-size:13px;"><b>${s.name}</b></div>`).join('');
-    addHistory('🔍 Scanner','Brand Scanner: '+c.name,d.positioning?.substring(0,80));
-    toast('✅ Marca escaneada com sucesso!');
-  }catch(e){ if(e.message!=='no key') alert('Erro: '+e.message); }
-  document.getElementById('btn-scan').disabled=false; document.getElementById('sc-loading').style.display='none';
+    // PASSO 1: Ler o site de verdade
+    document.getElementById('sc-loading-text').textContent='📖 Lendo o site...';
+    const siteContent = await fetchSiteContent(url);
+    const siteInfo = siteContent ? `\n\nCONTEÚDO REAL DO SITE:\n${siteContent}` : '\n\n(Não foi possível ler o site — use a descrição acima)';
+
+    // PASSO 2: Analisar com IA
+    document.getElementById('sc-loading-text').textContent='🧠 Analisando com IA...';
+    const prompt = `Analise este site como especialista em SEO, GEO e AEO.
+
+URL: ${url}
+Cidade: ${city}
+Segmento: ${seg}
+Descrição: ${desc||'não informada'}
+${siteInfo}
+
+Retorne APENAS este JSON (sem texto antes ou depois):
+{
+  "brand_name": "nome da marca",
+  "seo_score": 60,
+  "geo_score": 30,
+  "aeo_score": 35,
+  "da": 20,
+  "seo_solutions": ["ação 1 específica", "ação 2", "ação 3"],
+  "geo_solutions": ["ação GEO 1", "ação GEO 2", "ação GEO 3"],
+  "aeo_solutions": ["ação AEO 1", "ação AEO 2", "ação AEO 3"],
+  "services": [
+    {"name": "Serviço 1", "description": "descrição", "keywords_count": 25, "problems_count": 10, "angles_count": 10}
+  ],
+  "positioning": "posicionamento atual em 2-3 frases",
+  "gaps_prioritized": [
+    {"impact": "alto", "title": "Problema 1", "solution": "solução específica"},
+    {"impact": "alto", "title": "Problema 2", "solution": "solução específica"},
+    {"impact": "médio", "title": "Problema 3", "solution": "solução específica"},
+    {"impact": "médio", "title": "Problema 4", "solution": "solução específica"},
+    {"impact": "baixo", "title": "Problema 5", "solution": "solução específica"},
+    {"impact": "baixo", "title": "Problema 6", "solution": "solução específica"}
+  ]
+}`;
+
+    const raw = await callClaude(prompt, 'Responda APENAS com JSON válido. Baseie a análise no conteúdo REAL do site fornecido.', 3000);
+    const d = parseJSON(raw);
+    if(!d) throw new Error('Erro ao processar análise');
+
+    // Salvar fixo
+    c.seoScore=d.seo_score; c.geoScore=d.geo_score; c.aeoScore=d.aeo_score;
+    c.services=d.services||[];
+    c.scanData=d;
+    c.scanDate=new Date().toISOString();
+    saveClients();
+    renderScanResult(d,c);
+    addHistory('🔍 Scanner','Brand Scanner: '+c.name, d.positioning?.substring(0,80));
+    toast('✅ Site lido e analisado! Scores fixos até Re-escanear.');
+  }catch(e){
+    if(e.message!=='no key'){
+      console.error('Scanner error:', e);
+      alert('Erro ao analisar: '+e.message+'\n\nTente novamente. Se persistir, verifique sua API Key.');
+    }
+  }
+
+  document.getElementById('btn-scan').disabled=false;
+  document.getElementById('sc-loading').style.display='none';
 }
 
 // ===== KEYWORDS =====
 async function runKeywords(){
   if(!currentClientId) return;
-  const svc=document.getElementById('kw-service').value.trim(),cities=document.getElementById('kw-cities').value.trim()||'Brasil',aud=document.getElementById('kw-audience').value.trim();
+  const svc=document.getElementById('kw-service').value.trim();
+  const cities=document.getElementById('kw-cities').value.trim()||'Brasil';
+  const aud=document.getElementById('kw-audience').value.trim();
   if(!svc){ alert('Informe o serviço.'); return; }
   document.getElementById('btn-kw').disabled=true; document.getElementById('kw-loading').style.display='flex'; document.getElementById('kw-result').style.display='none';
   try{
-    const raw=await callClaude(`SEO local, GEO e AEO Brasil. Serviço:${svc} Cidades:${cities} Público:${aud||'empresas locais'}\nRetorne APENAS JSON:\n{"keywords":["25 keywords locais"],"geo_prompts":["12 perguntas para IAs"],"problems":["10 problemas na voz do cliente em 1a pessoa"],"angles":["12 títulos de artigos"],"phrases":["8 frases-chave de posicionamento"]}`, 'Responda APENAS com JSON válido.');
+    const raw=await callClaude(`SEO local, GEO e AEO Brasil. Serviço:${svc} Cidades:${cities} Público:${aud||'clientes locais'}\nRetorne APENAS JSON:\n{"keywords":["25 keywords locais com intenção de busca"],"geo_prompts":["12 perguntas que pessoas fazem ao ChatGPT/Gemini sobre este serviço"],"problems":["10 problemas na voz do cliente em 1ª pessoa"],"angles":["12 títulos de artigos otimizados"],"phrases":["8 frases-chave de posicionamento"]}`, 'Responda APENAS com JSON válido.');
     const d=parseJSON(raw); if(!d) throw new Error();
     if(!clients[currentClientId].keywords) clients[currentClientId].keywords={};
     clients[currentClientId].keywords[svc]={...d,generatedAt:new Date().toISOString()}; saveClients();
@@ -579,12 +875,13 @@ async function generateContent(){
   const svc=document.getElementById('pg-service').value.trim(),brand=document.getElementById('pg-brand').value.trim();
   document.getElementById('btn-content').disabled=true; document.getElementById('pg-content').style.display='none';
   try{
-    const content=await callClaude(`Escreva um artigo SEO completo em português brasileiro.\nTítulo: ${selectedPageTitle}\nServiço: ${svc} | Marca: ${brand||'nossa empresa'}\n800-1200 palavras, H1, intro envolvente, 3-4 seções H2, FAQ com 3 perguntas (formato AEO), CTA final. Tom profissional e acessível. Inclua a cidade e serviço naturalmente no texto.`);
+    const content=await callClaude(`Escreva um artigo SEO completo em português brasileiro.\nTítulo: ${selectedPageTitle}\nServiço: ${svc} | Marca: ${brand||'nossa empresa'}\n800-1200 palavras. Use # para H1, ## para H2. Inclua intro envolvente, 3-4 seções, FAQ com 3 perguntas (AEO), CTA final. Tom profissional. Inclua cidade e serviço naturalmente.`, '', 2000);
+    lastGeneratedContent = content;
     document.getElementById('pg-content-title').textContent=selectedPageTitle;
     document.getElementById('pg-content-text').textContent=content;
     document.getElementById('pg-content').style.display='block';
     addHistory('✍️ Conteúdo','Artigo: '+selectedPageTitle,content.substring(0,80)+'...');
-    toast('✅ Artigo gerado!');
+    toast('✅ Artigo gerado! Use "Copiar HTML" para colar no WordPress.');
   }catch(e){ if(e.message!=='no key') alert('Erro ao gerar conteúdo.'); }
   document.getElementById('btn-content').disabled=false;
 }
@@ -596,11 +893,13 @@ async function runGeo(){
   if(!niche){ alert('Informe o nicho.'); return; }
   document.getElementById('btn-geo').disabled=true; document.getElementById('geo-loading').style.display='flex'; document.getElementById('geo-result').style.display='none';
   try{
-    const raw=await callClaude(`GEO e AEO specialist. Marca:${brand||'empresa'} Nicho:${niche}\nRetorne APENAS JSON:\n{"geo_visibility":25,"aeo_visibility":30,"citation_potential":40,"prompts":["12 perguntas exatas que usuários fazem às IAs sobre este nicho"],"ia_response_simulation":"200 palavras simulando como ChatGPT/Gemini responderia sobre este nicho","optimization_tips":"Liste 6-8 ações práticas e específicas para esta marca aparecer nas IAs"}`, 'Responda APENAS com JSON válido.');
+    const raw=await callClaude(`GEO e AEO specialist. Marca:${brand||'empresa'} Nicho:${niche}\nRetorne APENAS JSON:\n{"geo_visibility":25,"aeo_visibility":30,"citation_potential":40,"prompts":["12 perguntas exatas que usuários fazem às IAs"],"ia_response_simulation":"200 palavras simulando como ChatGPT/Gemini responderia","optimization_tips":"6-8 ações específicas para aparecer nas IAs"}`, 'Responda APENAS com JSON válido.');
     const d=parseJSON(raw); if(!d) throw new Error();
     document.getElementById('geo-metrics').innerHTML=`<div class="metric"><div class="metric-val c-green">${d.geo_visibility}/100</div><div class="metric-label">GEO Visibility</div></div><div class="metric"><div class="metric-val c-orange">${d.aeo_visibility}/100</div><div class="metric-label">AEO Score</div></div><div class="metric"><div class="metric-val c-yellow">${d.citation_potential}/100</div><div class="metric-label">Citation Potential</div></div>`;
     document.getElementById('geo-ptags').innerHTML=(d.prompts||[]).map(p=>`<span class="tag tag-geo">${p}</span>`).join('');
-    document.getElementById('geo-sim').textContent=d.ia_response_simulation||''; document.getElementById('geo-tips').textContent=d.optimization_tips||''; document.getElementById('geo-result').style.display='block';
+    document.getElementById('geo-sim').textContent=d.ia_response_simulation||'';
+    document.getElementById('geo-tips').textContent=d.optimization_tips||'';
+    document.getElementById('geo-result').style.display='block';
     addHistory('🤖 GEO/AEO','Análise GEO: '+niche,d.optimization_tips?.substring(0,80));
     toast('✅ Análise GEO concluída!');
   }catch(e){ if(e.message!=='no key') alert('Erro. Tente novamente.'); }
@@ -610,15 +909,18 @@ async function runGeo(){
 // ===== REPORT =====
 async function runReport(){
   if(!currentClientId) return;
-  const client=document.getElementById('rep-client').value.trim()||clients[currentClientId]?.name||'Cliente',period=document.getElementById('rep-period').value.trim()||'Mês atual',results=document.getElementById('rep-results').value.trim();
+  const client=document.getElementById('rep-client').value.trim()||clients[currentClientId]?.name||'Cliente';
+  const period=document.getElementById('rep-period').value.trim()||'Mês atual';
+  const results=document.getElementById('rep-results').value.trim();
   document.getElementById('btn-rep').disabled=true; document.getElementById('rep-loading').style.display='flex'; document.getElementById('rep-result').style.display='none';
   const c=clients[currentClientId];
+  const scanCtx = c.scanData ? `SEO:${c.scanData.seo_score} GEO:${c.scanData.geo_score} AEO:${c.scanData.aeo_score}` : '';
   try{
-    const content=await callClaude(`Crie um relatório executivo completo de SEO/GEO/AEO em português brasileiro.\nCliente: ${client} | Período: ${period} | Páginas geradas: ${c.pages?.length||0} | Relatórios anteriores: ${c.reports?.length||0}\nResultados informados: ${results||'use dados simulados realistas e profissionais'}\nEstrutura obrigatória: 1) Resumo Executivo, 2) Métricas do Período, 3) SEO Programático, 4) GEO/AEO - Visibilidade nas IAs, 5) Google Meu Negócio, 6) Análise de Rankings, 7) Próximos Passos (5 ações prioritárias), 8) Conclusão. Tom profissional, orientado a resultados.`);
+    const content=await callClaude(`Relatório executivo SEO/GEO/AEO em português.\nCliente: ${client} | Período: ${period} | Páginas: ${c.pages?.length||0} | ${scanCtx}\nResultados: ${results||'use dados simulados realistas'}\nEstrutura: 1)Resumo Executivo 2)Métricas 3)SEO Programático 4)GEO/AEO nas IAs 5)Google Meu Negócio 6)Rankings 7)Próximos Passos(5 ações) 8)Conclusão. Tom profissional.`, '', 2000);
     document.getElementById('rep-text').textContent=content; document.getElementById('rep-result').style.display='block';
-    if(!clients[currentClientId].reports) clients[currentClientId].reports=[];
-    clients[currentClientId].reports.push({period,content,generatedAt:new Date().toISOString()});
-    document.getElementById('ov-reports').textContent=clients[currentClientId].reports.length;
+    if(!c.reports) c.reports=[];
+    c.reports.push({period,content,generatedAt:new Date().toISOString()});
+    document.getElementById('ov-reports').textContent=c.reports.length;
     saveClients(); renderSavedReports();
     addHistory('📋 Relatório','Relatório: '+period,content.substring(0,80)+'...');
     toast('✅ Relatório gerado e salvo!');
@@ -626,11 +928,23 @@ async function runReport(){
   document.getElementById('btn-rep').disabled=false; document.getElementById('rep-loading').style.display='none';
 }
 
+// ===== PROTEÇÃO DE DADOS =====
+window.addEventListener('beforeunload', ()=>{ sessionStorage.setItem('beekeeper_backup',JSON.stringify(clients)); });
+
 // ===== INIT =====
 window.onload=()=>{
+  // Recuperar backup se necessário
+  const local=localStorage.getItem(STORAGE_KEY);
+  const session=sessionStorage.getItem('beekeeper_backup');
+  if((!local||local==='{}')&&session){
+    try{ const r=JSON.parse(session); if(Object.keys(r).length>0){ clients=r; localStorage.setItem(STORAGE_KEY,session); } }catch(e){}
+  }
   loadClients();
+  loadCredits();
   if(!getApiKey()) document.getElementById('setup-screen').style.display='flex';
   else document.getElementById('setup-screen').style.display='none';
+  // Auto-backup a cada 3 minutos
+  setInterval(()=>{ sessionStorage.setItem('beekeeper_backup',JSON.stringify(clients)); },3*60*1000);
 };
 </script>
 </body>
